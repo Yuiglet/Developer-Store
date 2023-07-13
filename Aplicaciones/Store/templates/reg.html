@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="description" content="Description">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <link type='text/css' href='{% static "css/estilo.css" %}' rel='stylesheet' />
+
+</head>
+
+<body>
+
+    <main class="main">
+
+        <div class="main-inner">
+            </header><!-- Hacer responsivo con lo de inicio de sesion  -->
+            <div class="login-box">
+                <h2>Registro</h2>
+                <form action="/newUser/" id="formularioReg" method="post">
+                    {% csrf_token %}
+                    <div class="user-box">
+                        <input type="text" name="txtCorreo" required="">
+                        <label>Correo</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="txtUsuario" required="">
+                        <label>Usuario</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="txtNombre" required="">
+                        <label>Nombre</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="txtApellido" required="">
+                        <label>Apellido</label>
+                    </div>
+                    <div class="user-box">
+                        <label class="sel">Selecciona pregunta de seguridad</label>
+                        <select name="txtNPregunta" id="preg">
+                            <option value="P1" name="p3" id="p1">Nombre de tu mascota</option>
+                            <option value="P2" name="p2" id="p2">Nombre de tu mama</option>
+                            <option value="P3" name="p3" id="p3">Artista favorito</option>
+                        </select>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" placeholder="" name="txtRespuesta" id="res" required>
+                        <label>Respuesta</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="password" name="txtContrasena" required="">
+                        <label>Password</label>
+                    </div>
+
+                    <button type="submit" style="--clr:#0FF0FC; margin-left: 20%;"><span>Enviar</span><i></i></button>
+                    <p style="font-size: 1px;"><a href="/Login/">Ya tienes una cuenta? Inicia sesion</a></p>
+                </form>
+            </div>
+    </main><!-- End main -->
+
+</body>
+
+</html>
