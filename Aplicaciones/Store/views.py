@@ -28,8 +28,13 @@ def Log_in(request):
     CorreoP = request.POST['txtCorreo']
     Correo = html.escape(CorreoP)
     Contrasena = request.POST['txtContrasena']
-    usuario = Usuario.objects.check(Correo = Correo, Contrasena = Contrasena)
-    if usuario == True:
-       usuarioD = Usuario.objects.get(Correo = Correo)
-       usuarioD.NomUsuario = NomUsuario
+    usuario = Usuario.objects.filter(Correo = Correo, Contrasena = Contrasena).exists()
+    if usuario:
+        usuarioD = Usuario.objects.get(Correo = Correo)
+        datosObt = []
+        usuarioD.NomUsuario = datosObt
+        return redirect ('/MyUser/', usuarioD, request)
+
+
+    
    
