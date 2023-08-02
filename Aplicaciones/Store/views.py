@@ -20,10 +20,10 @@ def new_user(request):
  Contrasena = request.POST['txtContrasena']
  usuario = Usuario.objects.create(Correo = Correo,NomUsuario = NomUsuario, Nombre = Nombre, Apellido = Apellido, NPregunta = NPregunta, Respuesta = Respuesta, Contrasena = Contrasena )
  return redirect('/MyUser/')
-def my_user(request):
-   return render (request, "MiPerfil.html")
+ 
 def login(request):
    return render (request,"Login.html" )
+
 def Log_in(request):
     CorreoP = request.POST['txtCorreo']
     Correo = html.escape(CorreoP)
@@ -31,9 +31,12 @@ def Log_in(request):
     usuario = Usuario.objects.filter(Correo = Correo, Contrasena = Contrasena).exists()
     if usuario:
         usuarioD = Usuario.objects.get(Correo = Correo)
-        datosObt = []
-        usuarioD.NomUsuario = datosObt
-        return redirect ('/MyUser/', usuarioD, request)
+        data = {
+           'datos': usuarioD
+        }
+        return render (request, 'MiPerfil.html', data)
+    else:
+       return redirect('/Login/')
 
 
     
