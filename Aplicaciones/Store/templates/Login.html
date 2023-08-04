@@ -1,6 +1,154 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    a {
+        color: white;
+    }
+
+    body {
+        font-family: 'Kanit', sans-serif;
+        background-color: #000000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin-top: -5%;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .login-form {
+        background-color: #000000;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px dodgerblue;
+        margin: 30px;
+        width: 100%;
+    }
+
+    .login-form h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 40px;
+        margin-top: 0px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .form-group input {
+        width: 40%;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        background-color: #3b425a;
+        color: #fff;
+        margin-left: 30%;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        box-shadow: 0px -1px 8px dodgerblue;
+    }
+
+    .form-group .btn {
+        width: 20%;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        background-color: dodgerblue;
+        color: #fff;
+        cursor: pointer;
+        margin-left: 40%;
+        margin-top: 25px;
+    }
+
+    .form-group .btn:hover {
+        background-color: rgb(0, 92, 185);
+    }
+
+    @media screen and (max-width: 576px) {
+        .login-form {
+            padding: 50px;
+        }
+    }
+
+    h2 {
+        font-size: 200%;
+        text-shadow: 0 0 5px dodgerblue, 0 0 15px dodgerblue, 0 0 20px dodgerblue, 0 0 40px dodgerblue, 0 0 60px blue, 0 0 10px dodgerblue, 0 0 98px blue;
+        color: rgb(255, 255, 255);
+        font-family: 'Kanit', sans-serif;
+        text-align: center;
+        animation: blink 12s infinite;
+        -webkit-animation: blink 12s infinite;
+        -webkit-text-stroke: 0px dodgerblue;
+
+    }
+
+    @-webkit-keyframes blink {
+
+        20%,
+        24%,
+        55% {
+            color: #111;
+            text-shadow: none;
+        }
+
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+            text-shadow: 0 0 5px dodgerblue, 0 0 15px dodgerblue, 0 0 20px dodgerblue, 0 0 40px dodgerblue, 0 0 60px blue, 0 0 10px dodgerblue, 0 0 98px blue;
+            color: white;
+        }
+    }
+
+    @keyframes blink {
+
+        20%,
+        24%,
+        55% {
+            color: #111;
+            text-shadow: none;
+        }
+
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+            text-shadow: 0 0 5px dodgerblue, 0 0 15px dodgerblue, 0 0 20px dodgerblue, 0 0 40px dodgerblue, 0 0 60px blue, 0 0 10px dodgerblue, 0 0 98px blue;
+            color: white;
+        }
+    }
+</style>
 
 <head>
 
@@ -9,34 +157,31 @@
     <meta name="description" content="Description">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-    <link type='text/css' href='{% static "css/estilo.css" %}' rel='stylesheet' />
+
 
 </head>
 
 <body>
+    <div class="container">
 
-    <main class="main">
+        <form action="/Log_in/" id="formularioReg" class="login-form" method="post">
+            <h2>Iniciar sesion</h2>
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="text" class="form-control" name="txtCorreo" required="">
+                <br><br>
+                <label>Password</label>
+                <input type="password" class="form-control" name="txtContrasena" required="">
 
-        <div class="main-inner">
-            </header><!-- Hacer responsivo con lo de inicio de sesion  -->
-            <div class="login-box">
-                <h2>Iniciar sesion</h2>
-                <form action="/Log_in/" id="formularioReg" method="post">
-                    {% csrf_token %}
-                    <div class="user-box">
-                        <input type="text" name="txtCorreo" required="">
-                        <label>Correo</label>
-                    </div>
-                    <div class="user-box">
-                        <input type="password" name="txtContrasena" required="">
-                        <label>Password</label>
-                    </div>
-
-                    <button type="submit" style="--clr:#0FF0FC; margin-left: 20%;"><span>Ingresar</span><i></i></button>
-                    <p style="font-size: 1px;"><a href="/">Nuevo? Registrate gratis</a></p>
-                </form>
+                <div class="form-group">
+                    <input type="submit" value="ENVIAR" class="btn">
+                </div>
+                <p style="font-size: 18px; text-align: center;"><a href="/"> ¿Nuevo? Registrate aqui</a></p>
             </div>
-    </main><!-- End main -->
+
+        </form>
+    </div>
 
 </body>
 

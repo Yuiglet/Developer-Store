@@ -30,7 +30,6 @@ def Log_in(request):
     Correo = html.escape(CorreoP)
     Contrasena = request.POST['txtContrasena']
     usuario = Usuario.objects.filter(Correo = Correo, Contrasena = Contrasena).exists()
-    Correo
     if usuario:
         return HttpResponseRedirect('/Profile/?correo={}'.format(Correo))
     else:
@@ -39,8 +38,28 @@ def Log_in(request):
 def Profile (request):
     Correo = request.GET.get('correo')
     usuarioD = Usuario.objects.get(Correo = Correo)
+    message = request.GET.get('message')
     data = {
-        'datos': usuarioD
+        'datos': usuarioD,
+        'message': message,
     }
     return render(request, "MiPerfil.html", data)
-   
+
+def edit_proflie(request):
+    idU = int (request.POST['id'])
+    CorreoP = request.POST['txtCorreo']
+    Correo = html.escape(CorreoP)
+    NomUsuario = request.POST['txtUsuario']
+    Nombre = request.POST['txtNombre']
+    Apellido = request.POST['txtApellido']
+    Contrasena = request.POST['txtContrasena']
+
+    usuario = Usuario.objects.get(id=idU)
+    usuario.Correo = Correo
+    usuario.NomUsuario = NomUsuario
+    usuario.Nombre = Nombre
+    usuario.Apellido = Apellido
+    usuario.Contrasena = Contrasena
+    usuario.save()
+    message = "Perfil modificado correctamente."
+    return HttpResponseRedirect(f'/Profile/?correo={Correo}&message={message}')

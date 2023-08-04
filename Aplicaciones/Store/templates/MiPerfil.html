@@ -156,11 +156,34 @@ h2 {
         <link type='text/css' href='{% static "css/estiloP.css" %}' rel='stylesheet' />
         <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Kanit:wght@300&display=swap" rel="stylesheet">
     </head>
+    <script>
+      // Función para ocultar la alerta después de unos segundos
+      function hideAlert() {
+        var alertElement = document.getElementById('alert');
+        alertElement.style.display = 'none';
+      }
+    
+      // Mostrar la alerta cuando se cargue la página
+      document.addEventListener('DOMContentLoaded', function () {
+        var alertElement = document.getElementById('alert');
+        if (alertElement) {
+          setTimeout(hideAlert, 5000); // Ocultar la alerta después de 5 segundos (5000 ms)
+        }
+      });
+    </script>
     <body>
+        {% if message %}
+        <div id="alert" class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endif %}
         <div class="container">
-            <form class="login-form" id="bootstrapForm" action="/modif_user/">
+            <form class="login-form" id="bootstrapForm" action="/Edit_Profile/" method="post">
+              {% csrf_token %}
                 <h2>Perfil</h2>
                 <div class="form-group">
+                    <input type="text" id="id" name="id" placeholder=" "
+                    style="text-align: center;" class="form-control" required value=" {{datos.id}} " hidden>
                     <label for="">Correo</label>
                     <input type="text" id="Correo" name="txtCorreo" placeholder=""
                         style="text-align: center;" class="form-control" required value=" {{datos.Correo}} "> <br>
@@ -174,8 +197,8 @@ h2 {
                     <input type="text" id="Apellido" name="txtApellido" placeholder=""
                         style="text-align: center; margin-top: 5px;" class="form-control" required readonly value=" {{datos.Apellido}} ">
                         <label for="">Contraseña</label>
-                    <input type="text" id="Contraseña" name="txtContrasena" placeholder=""
-                        style="text-align: center; margin-top: 5px;" class="form-control" required  value="*******">
+                    <input type="password" id="Contraseña" name="txtContrasena" placeholder=""
+                        style="text-align: center; margin-top: 5px;" class="form-control" required  value=" {{datos.Contrasena}} ">
                 </div>
                 <div class="form-group">
                     <input type="submit" value="ENVIAR" class="btn">
